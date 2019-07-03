@@ -1,5 +1,6 @@
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMWFjMDdmZjBkYjI0M2I3MjUwMWFjMyIsImlhdCI6MTU2MjEyNzkzM30.DpRJFk4tGkQ7mb2w_TvAZUOGN1nHeLh92jB_TWgmxSE",
   "connection_type": "asset",
-  "server_uri": "http://174.129.167.18:4005"
+  "server_uri": "http://174.129.167.18:4005",
+  "gate_relay_port_num": 26
 }

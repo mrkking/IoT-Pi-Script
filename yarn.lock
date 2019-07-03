@@ -126,6 +126,11 @@ isarray@2.0.1:
   resolved "https://registry.yarnpkg.com/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
   integrity sha1-o32U7ZzaLVmGXJ92/llu4fM4dB4=
 
+lokijs@^1.5.6:
+  version "1.5.6"
+  resolved "https://registry.yarnpkg.com/lokijs/-/lokijs-1.5.6.tgz#6de6b8c3ff7a972fd0104169f81e7ddc244c029f"
+  integrity sha512-xJoDXy8TASTjmXMKr4F8vvNUCu4dqlwY5gmn0g5BajGt1GM3goDCafNiGAh/sfrWgkfWu1J4OfsxWm8yrWweJA==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"

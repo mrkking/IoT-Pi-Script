@@ -17,10 +17,7 @@ const socket = io('http://localhost:4005', {
 
 socket.on('connect', _ => {
   console.log('socket connected');
-});
-
-socket.on('connect', _ => {
-  console.log('connected');
+  getState();
 });
 
 socket.on('connection_error', _ => {
@@ -31,8 +28,10 @@ socket.on('disconnect', _ => {
   console.log('disconnected');
 });
 
+
 socket.on('reconnect',  _ => {
   console.log('reconnected');
+  getState();
 });
 
 socket.on('reconnect_failed',  _ => {
