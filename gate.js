@@ -19,7 +19,7 @@ module.exports = class Gate {
       this.getState();
       return;
     }
-    const cmd = spawn('python', ['main.py', this.port, 'close']);
+    const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'close']);
     cmd.stdout.on('data', (data) => {
       this.getState();
     });
@@ -31,9 +31,10 @@ module.exports = class Gate {
       this.getState();
       return;
     }
-    const cmd = spawn('python', ['main.py', this.port, 'open']);
+    const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'open']);
     cmd.stdout.on('data', (data) => {
-      this.getState();
+      console.log(data);
+   	this.getState();
     });
   }
 
@@ -47,8 +48,9 @@ module.exports = class Gate {
       }, 5000);
       return;
     }
-    const cmd = spawn('python', ['main.py', 26, 'toggle']);
+    const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'toggle']);
     cmd.stdout.on('data', (data) => {
+      console.log(data);
       this.getState();
     });
   }
@@ -58,9 +60,10 @@ module.exports = class Gate {
       this.onStateChangeListener.emit('state', this.__state_dev);
       return;
     }
-    const cmd = spawn('python', ['main.py', 26, 'state']);
+    const cmd = spawn('python', ['main.py', this.port, 'state']);
     cmd.stdout.on('data', (data) => {
       try {
+	console.log(data);
         this.onStateChangeListener.emit('state', JSON.parse(data));
       } catch(e) {
         console.log(e, data);

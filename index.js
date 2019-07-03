@@ -1,4 +1,4 @@
-process.env.dev = true;
+//process.env.dev = true;
 require('./config');
 const socket = require('./socket_connection');
 const Gate = require('./gate');
@@ -21,7 +21,7 @@ const emitState = (state) => {
 };
 
 socket.on('operate', cmd => {
-  console.log(cmd);
+  console.log('operate', cmd);
   switch(cmd['state']) {
     case 'open':
       gate.open();
@@ -59,14 +59,14 @@ socket.on('reconnect',  _ => {
 //   console.log('connected');
 // });
 //
-// socket.on('connection_error', _ => {
-//   console.log(_);
-// });
+ socket.on('connection_error', _ => {
+   console.log(_);
+ });
 //
 // socket.on('reconnect_failed',  _ => {
 //   console.log('reconnect failed');
 // });
 //
-// socket.on('reconnecting',  _ => {
-//   console.log('reconnecting');
-// });
+ socket.on('reconnecting',  _ => {
+   console.log('reconnecting');
+ });
