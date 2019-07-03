@@ -1,4 +1,3 @@
-//process.env.dev = true;
 require('./config');
 const socket = require('./socket_connection');
 const Gate = require('./gate');
@@ -6,12 +5,14 @@ const gate = new Gate(process.env['gate_relay_port_num']);
 let stateListener = null;
 const {AccessKeysCollection} = require('./db/db_handler');
 const accessKeyHandler = new AccessKeysCollection();
-
+const Updater = require('./utils/updater');
+let updater = null;
 
 onConnect = () => {
   stateListener = stateListener ? stateListener : gate.onStateChange()
       .on('state', _ => emitState(_));
   gate.getState();
+  updater = new Updater(socket);
 };
 
 socket.on('ready', _ => onConnect());

@@ -35,5 +35,10 @@ module.exports = {
       return this.collection.find();
     }
   },
-  OfflineAccessLogCollection: db.addCollection('asset')
+  OfflinePinAccessLogCollection: class {
+
+    constructor() {
+      this.collection = db.addCollection('pin_access_log');
+    }
+  }
 };

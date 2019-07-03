@@ -1,6 +1,7 @@
 const {spawn} = require('child_process');
 const {EventEmitter} = require('events');
 
+
 module.exports = class Gate {
 
   constructor(port) {
