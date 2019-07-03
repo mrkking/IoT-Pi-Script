@@ -33,7 +33,6 @@ module.exports = class Gate {
     }
     const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'open']);
     cmd.stdout.on('data', (data) => {
-      console.log(data);
    	this.getState();
     });
   }
