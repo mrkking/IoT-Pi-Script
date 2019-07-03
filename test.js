@@ -1,5 +1,4 @@
 require('./config');
-const {spawn} = require('child_process');
 const io = require('socket.io-client');
 const btoa = require('btoa');
 
@@ -8,7 +7,7 @@ const creds = btoa(JSON.stringify({
   'connection-type': process.env['connection_type']
 }));
 
-const socket = io(process.env['server_uri'], {
+const socket = io('http://localhost:4005', {
   'reconnection': true,
   'reconnectionDelay': 1000,
   query: {
@@ -63,50 +62,18 @@ socket.on('command', cmd => {
 });
 
 const open = () => {
-  spawn('python', ['main.py', 26, 'open']);
-  getState();
+
 };
 
 const close = () => {
-  spawn('python', ['main.py', 26, 'close']);
-  getState();
+
 };
 
 const toggle = () => {
-  const cmd = spawn('python', ['main.py', 26, 'toggle']);
-  cmd.stdout.on('data', (data) => {
-    try {
-      socket.emit('state', JSON.parse(data));
-    } catch(e) {
-      console.log(e);
-    }
-  });
 
-  cmd.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
-  });
-
-  cmd.on('close', (code) => {
-    console.log(`child process exited with code ${code}`);
-  });
 };
 
 const getState = () => {
   socket.emit('state', {state: 'open'});
-  const cmd = spawn('python', ['main.py', 26, 'state']);
-  cmd.stdout.on('data', (data) => {
-    try {
-      socket.emit('state', JSON.parse(data));
-    } catch(e) {
-      // console.log(e);
-    }
-  });
 
-  cmd.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
-  });
-
-  cmd.on('close', (code) => {
-    console.log(`child process exited with code ${code}`);
-  });
 };
