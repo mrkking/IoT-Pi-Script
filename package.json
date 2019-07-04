@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "Kory King",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "atob": "^2.1.2",
     "btoa": "^1.2.1",
