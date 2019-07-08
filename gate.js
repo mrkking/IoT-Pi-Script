@@ -43,10 +43,6 @@ module.exports = class Gate {
       }
       cmd.kill();
     });
-
-    cmd.stderr.on('data', _ => {
-      console.log(`${_}`);
-    })
   }
 
 };

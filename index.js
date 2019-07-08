@@ -13,8 +13,7 @@ onConnect = () => {
 socket.on('ready', _ => onConnect());
 
 const emitState = (state) => {
-  console.log('emit state', state);
-  socket.emit('state', gate.getState());
+  socket.emit('state', state);
 };
 
 socket.on('operate', cmd => {
@@ -33,7 +32,6 @@ socket.on('operate', cmd => {
       gate.getState();
       break;
   }
-  gate.getState();
 });
 
 socket.on('access_keys', data => {
