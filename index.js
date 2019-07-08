@@ -5,13 +5,10 @@ const gate = new Gate(process.env['gate_relay_port_num']);
 let stateListener = null;
 const {AccessKeysCollection} = require('./db/db_handler');
 const accessKeyHandler = new AccessKeysCollection();
-const Updater = require('./utils/updater');
-let updater = null;
 
 onConnect = () => {
-  stateListener = gate.onStateChangeListener
+  stateListener = gate.onStateChange
       .on('state', _ => emitState(_));
-  // updater = new Updater(socket);
 };
 
 socket.on('ready', _ => onConnect());
@@ -42,13 +39,10 @@ socket.on('operate', cmd => {
 
 socket.on('access_keys', data => {
   accessKeyHandler.addNewKeys(data ? data['keys'] : []);
-//  console.log(accessKeyHandler.get());
 });
 
 socket.on('connect', _ => {
-  console.log('reconnected to server at: '+ (process.env.hasOwnProperty('dev') ?
-    process.env['server_uri']:
-    process.env['server_uri']));
+  console.log('connected to server at: '+ process.env['server_uri']);
 });
 
 socket.on('disconnect', _ => {
@@ -56,25 +50,17 @@ socket.on('disconnect', _ => {
 });
 
 socket.on('reconnect',  _ => {
-  console.log('reconnected to server at: '+ (process.env.hasOwnProperty('dev') ?
-      process.env['server_uri']:
-      process.env['server_uri']));
+  console.log('reconnected to server at: ' + process.env['server_uri']);
 });
 
-// socket.on('connect', _ => {
-//   console.log('connected');
-// });
-//
- socket.on('connection_error', _ => {
-   console.log(_);
- });
-//
-// socket.on('reconnect_failed',  _ => {
-//   console.log('reconnect failed');
-// });
-//
- socket.on('reconnecting',  _ => {
-   console.log('connecting to server at: '+ (process.env.hasOwnProperty('dev') ?
-       process.env['server_uri']:
-       process.env['server_uri']));
- });
+socket.on('connect', _ => {
+  console.log('connected');
+});
+
+socket.on('connection_error', _ => {
+ console.log(_);
+});
+
+socket.on('reconnecting',  _ => {
+ console.log('connecting to server at: ' + process.env['server_uri']);
+});

@@ -5,8 +5,8 @@
   "author": "Kory King",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
-    "start-dev": "dev=true node index.js"
+    "start": "NODE_ENV=PROD node index.js",
+    "start-dev": "NODE_ENV=DEV node index.js"
   },
   "dependencies": {
     "atob": "^2.1.2",
