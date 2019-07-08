@@ -43,7 +43,7 @@
         <counts>
           <entry key="Dockerfile" value="55" />
           <entry key="gitignore" value="6" />
-          <entry key="js" value="3859" />
+          <entry key="js" value="3867" />
           <entry key="json" value="236" />
           <entry key="txt" value="14" />
         </counts>
@@ -52,7 +52,7 @@
         <counts>
           <entry key="Dockerfile" value="55" />
           <entry key="JSON" value="236" />
-          <entry key="JavaScript" value="3859" />
+          <entry key="JavaScript" value="3867" />
           <entry key="PLAIN_TEXT" value="20" />
         </counts>
       </usages-collector>
@@ -114,8 +114,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/gate.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="578">
-                  <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+                <state relative-caret-position="577">
+                  <caret line="38" column="49" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
                 </state>
               </provider>
             </entry>
@@ -216,7 +216,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562609621995" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562609668390" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -372,7 +372,7 @@
       <workItem from="1562201891562" duration="1229000" />
       <workItem from="1562203463567" duration="1301000" />
       <workItem from="1562591657572" duration="635000" />
-      <workItem from="1562596149867" duration="5315000" />
+      <workItem from="1562596149867" duration="5361000" />
     </task>
     <task id="LOCAL-00001" summary="second-commit">
       <created>1561498259826</created>
@@ -521,11 +521,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562609593284</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="second-commit">
+      <created>1562609629118</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1562609629118</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41804000" />
+    <option name="totallyTimeSpent" value="41850000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-480" y="-1080" width="1920" height="1080" extended-state="6" />
@@ -686,8 +693,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gate.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+        <state relative-caret-position="577">
+          <caret line="38" column="49" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="49" />
         </state>
       </provider>
     </entry>

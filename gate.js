@@ -36,7 +36,7 @@ module.exports = class Gate {
     cmd.stdout.on('data', (data) => {
       try {
         if (`${data}` !== '') {
-          console.log(`${data}`.trim());
+          console.log(JSON.parse(`${data}`.trim()));
         }
       } catch(e) {
         console.log(e, data);
