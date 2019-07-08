@@ -35,8 +35,7 @@ module.exports = class Gate {
     const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'state']);
     cmd.stdout.on('data', (data) => {
       try {
-        this.onStateChange(JSON.parse(data));
-	cmd.kill();
+        console.log(`${data}`);
       } catch(e) {
         console.log(e, data);
       }
