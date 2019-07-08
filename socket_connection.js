@@ -6,10 +6,7 @@ const creds = btoa(JSON.stringify({
   'connection-type': process.env['connection_type']
 }));
 
-module.exports = io(
-process.env.hasOwnProperty('dev') ?
-     process.env['server_uri']:
-     process.env['server_uri'], {
+module.exports = io(process.env['server_uri'], {
   'reconnection': true,
   'reconnectionDelay': 1000,
   query: {

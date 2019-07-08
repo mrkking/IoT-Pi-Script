@@ -1,16 +1,12 @@
 const config = require('./config.json');
 const package_info = require('../package');
 
-
-
 process.env['APP_VERSION'] = package_info['version'];
 
-const env = process.env.NODE_ENV;
+let env = process.env.NODE_ENV ? process.env.NODE_ENV : 'DEV';
 
-if (!env) {
-  evn = 'DEV';
-}
+console.log(config[env]);
 
 Object.keys(config[env]).forEach(function(key){
-  process.env[key] = config[key];
+  process.env[key] = config[env][key];
 });
