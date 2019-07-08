@@ -38,7 +38,6 @@ module.exports = class {
   getStatus() {
     const cmd = spawn('git', ['status']);
     cmd.stdout.on('data', (data) => {
-
       this._socket.emit('updater', 'status', `${data}`);
     });
   }
