@@ -9,7 +9,7 @@ const Updater = require('./utils/updater');
 let updater = null;
 
 onConnect = () => {
-  stateListener = stateListener ? stateListener : gate.onStateChange()
+  stateListener = gate.onStateChangeListener
       .on('state', _ => emitState(_));
   // updater = new Updater(socket);
 };
@@ -17,11 +17,12 @@ onConnect = () => {
 socket.on('ready', _ => onConnect());
 
 const emitState = (state) => {
-  console.log(state);
+  console.log('emit state', state);
   socket.emit('state', gate.getState());
 };
 
 socket.on('operate', cmd => {
+  console.log('from server', cmd);
   switch(cmd['state']) {
     case 'open':
       gate.open();
@@ -36,11 +37,12 @@ socket.on('operate', cmd => {
       gate.getState();
       break;
   }
+  gate.getState();
 });
 
 socket.on('access_keys', data => {
   accessKeyHandler.addNewKeys(data ? data['keys'] : []);
-  console.log(accessKeyHandler.get());
+//  console.log(accessKeyHandler.get());
 });
 
 socket.on('connect', _ => {
