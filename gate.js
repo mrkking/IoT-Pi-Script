@@ -6,11 +6,17 @@ module.exports = class Gate {
 
   constructor(port) {
     this.port = port ? port : 26;
-    this.onStateChangeListener = new EventEmitter();
+    this.onStateChangeListener = null;
   }
 
-  onStateChange() {
-    return this.onStateChangeListener;
+  setStateListener(fn) {
+    this.onStateChangeListener = fn;
+  }
+
+  onStateChange(state) {
+    if (this.onStateChangeListener) {
+      this.onStateChangeListener(state);
+    }
   }
 
   close() {
@@ -29,7 +35,7 @@ module.exports = class Gate {
     const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'state']);
     cmd.stdout.on('data', (data) => {
       try {
-        this.onStateChangeListener.emit('state', JSON.parse(data));
+        this.onStateChange(JSON.parse(data));
 	cmd.kill();
       } catch(e) {
         console.log(e, data);
