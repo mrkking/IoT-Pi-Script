@@ -8,12 +8,12 @@ const creds = btoa(JSON.stringify({
 
 module.exports = io(
 process.env.hasOwnProperty('dev') ?
-    'http://localhost:4005' :
+     process.env['server_uri']:
      process.env['server_uri'], {
   'reconnection': true,
   'reconnectionDelay': 1000,
   query: {
     credentials: creds,
-    sofware_version: process.env['APP_VERSION']
+    software_version: process.env['APP_VERSION']
   }
 });

@@ -36,7 +36,6 @@ module.exports = {
     }
   },
   OfflinePinAccessLogCollection: class {
-
     constructor() {
       this.collection = db.addCollection('pin_access_log');
     }

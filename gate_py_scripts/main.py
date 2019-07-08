@@ -17,8 +17,6 @@ if len(args) == 3:
         gate.open()
     elif command.lower() == 'close':
         gate.close()
-    elif command.lower() == 'toggle':
-        gate.toggle()
     elif command.lower() == 'state':
         gate.print_state()
     else:

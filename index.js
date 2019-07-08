@@ -45,7 +45,9 @@ socket.on('access_keys', data => {
 });
 
 socket.on('connect', _ => {
-  console.log('connected');
+  console.log('reconnected to server at: '+ (process.env.hasOwnProperty('dev') ?
+    process.env['server_uri']:
+    process.env['server_uri']));
 });
 
 socket.on('disconnect', _ => {
@@ -53,7 +55,9 @@ socket.on('disconnect', _ => {
 });
 
 socket.on('reconnect',  _ => {
-  console.log('reconnected');
+  console.log('reconnected to server at: '+ (process.env.hasOwnProperty('dev') ?
+      process.env['server_uri']:
+      process.env['server_uri']));
 });
 
 // socket.on('connect', _ => {
@@ -69,5 +73,7 @@ socket.on('reconnect',  _ => {
 // });
 //
  socket.on('reconnecting',  _ => {
-   console.log('reconnecting');
+   console.log('connecting to server at: '+ (process.env.hasOwnProperty('dev') ?
+       process.env['server_uri']:
+       process.env['server_uri']));
  });
