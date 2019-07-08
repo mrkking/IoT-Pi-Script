@@ -17,6 +17,7 @@ onConnect = () => {
 socket.on('ready', _ => onConnect());
 
 const emitState = (state) => {
+  console.log(state);
   socket.emit('state', gate.getState());
 };
 
