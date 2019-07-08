@@ -41,6 +41,7 @@ module.exports = class Gate {
       } catch(e) {
         console.log(e, data);
       }
+      cmd.kill();
     });
   }
 
