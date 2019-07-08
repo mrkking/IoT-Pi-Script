@@ -7,7 +7,8 @@ const {AccessKeysCollection} = require('./db/db_handler');
 const accessKeyHandler = new AccessKeysCollection();
 
 onConnect = () => {
-  stateListener = gate.setStateListener(_ => emitState(_))
+  stateListener = gate.setStateListener(_ => emitState(_));
+  gate.getState();
 };
 
 socket.on('ready', _ => onConnect());
