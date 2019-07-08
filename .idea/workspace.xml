@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c67d778c-5f0d-4264-aa8e-57449b2090ec" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,13 +27,13 @@
           <entry key="Dockerfile" value="1" />
           <entry key="gitignore" value="1" />
           <entry key="js" value="32" />
-          <entry key="json" value="10" />
+          <entry key="json" value="11" />
           <entry key="py" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JSON" value="10" />
+          <entry key="JSON" value="11" />
           <entry key="JavaScript" value="32" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Python" value="2" />
@@ -44,14 +44,14 @@
           <entry key="Dockerfile" value="55" />
           <entry key="gitignore" value="6" />
           <entry key="js" value="3547" />
-          <entry key="json" value="171" />
+          <entry key="json" value="172" />
           <entry key="txt" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Dockerfile" value="55" />
-          <entry key="JSON" value="171" />
+          <entry key="JSON" value="172" />
           <entry key="JavaScript" value="3547" />
           <entry key="PLAIN_TEXT" value="20" />
         </counts>
@@ -69,11 +69,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="24" />
+            <state relative-caret-position="623">
+              <caret line="30" column="18" lean-forward="true" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/config.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -105,7 +114,6 @@
         <option value="$PROJECT_DIR$/keys_handler.js" />
         <option value="$PROJECT_DIR$/db_handler.js" />
         <option value="$PROJECT_DIR$/keypad_handler.js" />
-        <option value="$PROJECT_DIR$/config/config.json" />
         <option value="$PROJECT_DIR$/config/index.js" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/gate_py_scripts/main.py" />
@@ -115,6 +123,7 @@
         <option value="$PROJECT_DIR$/utils/updater.js" />
         <option value="$PROJECT_DIR$/gate.js" />
         <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/config/config.json" />
       </list>
     </option>
   </component>
@@ -156,6 +165,11 @@
             <path>
               <item name="liftgate-pi-software" type="b2602c69:ProjectViewProjectNode" />
               <item name="liftgate-pi-software" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="liftgate-pi-software" type="b2602c69:ProjectViewProjectNode" />
+              <item name="liftgate-pi-software" type="462c0819:PsiDirectoryNode" />
               <item name="gate_py_scripts" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -167,7 +181,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562604137828" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562604314630" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -210,7 +224,7 @@
       <workItem from="1562201891562" duration="1229000" />
       <workItem from="1562203463567" duration="1301000" />
       <workItem from="1562591657572" duration="635000" />
-      <workItem from="1562596149867" duration="2395000" />
+      <workItem from="1562596149867" duration="2566000" />
     </task>
     <task id="LOCAL-00001" summary="second-commit">
       <created>1561498259826</created>
@@ -289,11 +303,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562603908093</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="second-commit">
+      <created>1562604147254</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1562604147254</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38884000" />
+    <option name="totallyTimeSpent" value="39055000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-480" y="-1080" width="1920" height="1080" extended-state="6" />
@@ -313,7 +334,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" x="-480" y="-1058" width="513" height="1058" id="Terminal" order="7" sideWeight="0.49893504" visible="true" weight="0.21485148" />
+      <window_info anchor="bottom" x="-480" y="-1058" width="513" height="1058" id="Terminal" order="7" sideWeight="0.49893504" visible="true" weight="0.21485148" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50106496" side_tool="true" weight="0.21862349" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.3299595" />
@@ -407,13 +428,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/utils/updater.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-118">
@@ -444,8 +458,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="24" />
+        <state relative-caret-position="623">
+          <caret line="30" column="18" lean-forward="true" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
         </state>
       </provider>
     </entry>
