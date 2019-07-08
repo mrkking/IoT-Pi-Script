@@ -11,18 +11,16 @@ let updater = null;
 onConnect = () => {
   stateListener = stateListener ? stateListener : gate.onStateChange()
       .on('state', _ => emitState(_));
-  gate.getState();
-  updater = new Updater(socket);
+  // updater = new Updater(socket);
 };
 
 socket.on('ready', _ => onConnect());
 
 const emitState = (state) => {
-  socket.emit('state', state);
+  socket.emit('state', gate.getState());
 };
 
 socket.on('operate', cmd => {
-  console.log('operate', cmd);
   switch(cmd['state']) {
     case 'open':
       gate.open();
