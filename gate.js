@@ -35,7 +35,9 @@ module.exports = class Gate {
     const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'state']);
     cmd.stdout.on('data', (data) => {
       try {
-        console.log(`${data}`);
+        if (`${data}` !== '') {
+          console.log(`${data}`);
+        }
       } catch(e) {
         console.log(e, data);
       }
