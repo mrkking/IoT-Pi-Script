@@ -21,10 +21,12 @@ module.exports = class Gate {
 
   close() {
     spawn('python', ['./gate_py_scripts/main.py', this.port, 'close']);
+    this.getState();
   }
 
   open() {
     spawn('python', ['./gate_py_scripts/main.py', this.port, 'open']);
+    this.getState();
   }
 
   toggle() {
