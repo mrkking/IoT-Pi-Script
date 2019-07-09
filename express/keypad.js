@@ -1,8 +1,12 @@
 const express = require('express');
 const app = express();
+const {AccessKeysCollection} = require('../db/db_handler');
+const keyCollection = new AccessKeysCollection();
 
 app.get('/:pin', (req, res) => {
-  console.log('PIN FROM EXPRESS ROUTE', req.params.pin);
+  const pin = req.params.pin;
+  console.log(keyCollection.get());
+  console.log(keyCollection.getKeyByPin(pin)); 
   res.send({});
 });
 

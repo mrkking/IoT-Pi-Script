@@ -5,8 +5,7 @@ const socket = require('./socket_connection');
 const Gate = require('./gate');
 const gate = new Gate(process.env['gate_relay_port_num']);
 let stateListener = null;
-const {AccessKeysCollection} = require('./db/db_handler');
-const accessKeyHandler = new AccessKeysCollection();
+const {accessKeys} = require('./db/db_handler');
 
 onConnect = () => {
   stateListener = gate.setStateListener(_ => emitState(_));
@@ -38,7 +37,8 @@ socket.on('operate', cmd => {
 });
 
 socket.on('access_keys', data => {
-  accessKeyHandler.addNewKeys(data ? data['keys'] : []);
+  console.log(data);
+  accessKeys.addNewKeys(data ? data['keys'] : []);
 });
 
 socket.on('connect', _ => {
