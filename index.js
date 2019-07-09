@@ -16,7 +16,7 @@ html_events.on('pin', _ => {
   gate.open();
   setTimeout(_ => {
     gate.close();
-  }, 3000);
+  }, 60000);
 });
 
 socket.on('ready', _ => onConnect());
