@@ -1,7 +1,8 @@
 #!/usr/bin/python
- 
+import json
 import RPi.GPIO as GPIO
- 
+import time 
+
 class keypad():
     def __init__(self, columnCount = 3):
         GPIO.setmode(GPIO.BCM)
@@ -86,15 +87,23 @@ class keypad():
                 GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) 
         for j in range(len(self.COLUMN)):
                 GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-         
+
+
+def printKeyPressed(key, key_press):
+    kpd = json.dumps({"Key": key})
+    if key_press is None:
+        print(kpd)
+    elif key_press != key:
+        print(kpd)
+    return key
+
 if __name__ == '__main__':
     # Initialize the keypad class
     kp = keypad()
-     
+    key_press = None 
     # Loop while waiting for a keypress
-    digit = None
-    while digit == None:
-        digit = kp.getKey()
-     
+    while True:
+      key_press =  printKeyPressed(kp.getKey(), key_press)
+           # time.sleep(0.5)
     # Print the result
-    print digit
+    # print digit

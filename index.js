@@ -1,4 +1,6 @@
 require('./config');
+require('./express');
+require('./keypad_handler');
 const socket = require('./socket_connection');
 const Gate = require('./gate');
 const gate = new Gate(process.env['gate_relay_port_num']);
