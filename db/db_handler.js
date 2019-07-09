@@ -1,43 +1,47 @@
 const loki = require('lokijs');
 const db = new loki('automate_server_cache.json');
 
-module.exports = {
-  AccessKeysCollection: class {
-    constructor() {
-      this.createDB();
-    }
+class AccessKeysCollection {
+  constructor() {
+    this.createDB();
+  }
 
-    createDB() {
-      this.collection = db.addCollection('asset',{
-        unique: ["user_id"],
-        autoupdate: true
-      });
-    }
+  createDB() {
+    this.collection = db.addCollection('asset',{
+      unique: ["user_id"],
+      autoupdate: true
+    });
+  }
 
-    addNewKeys(keys) {
-      db.removeCollection('asset');
-      this.createDB();
-      for (let i = 0; i < keys.length; i++) {
-        this.createKey(keys[i]);
-      }
-    }
-
-    createKey(key_data) {
-      const key = this.collection.find({user_id: key_data['_id']})[0];
-      return key ? key : this.collection.insert(key_data);
-    }
-
-    getKeyByPin(access_pin) {
-      return this.collection.find({access_pin: access_pin})[0];
-    }
-
-    get() {
-      return this.collection.find();
-    }
-  },
-  OfflinePinAccessLogCollection: class {
-    constructor() {
-      this.collection = db.addCollection('pin_access_log');
+  addNewKeys(keys) {
+    db.removeCollection('asset');
+    this.createDB();
+    for (let i = 0; i < keys.length; i++) {
+      this.createKey(keys[i]);
     }
   }
+
+  createKey(key_data) {
+    const key = this.collection.find({user_id: key_data['_id']})[0];
+    return key ? key : this.collection.insert(key_data);
+  }
+
+  getKeyByPin(access_pin) {
+    return this.collection.find({access_pin: access_pin})[0];
+  }
+
+  get() {
+    return this.collection.find();
+  }
+}
+
+class OfflinePinAccessLogCollection {
+  constructor() {
+    this.collection = db.addCollection('pin_access_log');
+  }
+}
+
+module.exports = {
+  accessKeys: new AccessKeysCollection(),
+  offlinePinLogger: new OfflinePinAccessLogCollection()
 };
