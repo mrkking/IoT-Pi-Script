@@ -13,7 +13,10 @@ onConnect = () => {
 };
 
 html_events.on('pin', _ => {
-  console.log(_);
+  gate.open();
+  setTimeout(_ => {
+    gate.close();
+  }, 3000);
 });
 
 socket.on('ready', _ => onConnect());
