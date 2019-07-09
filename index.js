@@ -1,5 +1,5 @@
 require('./config');
-require('./express');
+const html_events = require('./express');
 require('./keypad_handler');
 const socket = require('./socket_connection');
 const Gate = require('./gate');
@@ -11,6 +11,10 @@ onConnect = () => {
   stateListener = gate.setStateListener(_ => emitState(_));
   gate.getState();
 };
+
+html_events.on('pin', _ => {
+  console.log(_);
+});
 
 socket.on('ready', _ => onConnect());
 
