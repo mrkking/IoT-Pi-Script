@@ -6,11 +6,14 @@ const Gate = require('./gate');
 const gate = new Gate(process.env['gate_relay_port_num']);
 let stateListener = null;
 const {accessKeys} = require('./db/db_handler');
+const Updater = require('./utils/updater');
+let updater;
+
 
 onConnect = () => {
   stateListener = gate.setStateListener(_ => emitState(_));
   gate.getState();
-  new require('./utils/updater')(socket);
+  updater = new Updater(socket);
 };
 
 html_events.on('pin', _ => {
