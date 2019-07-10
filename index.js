@@ -10,6 +10,7 @@ const {accessKeys} = require('./db/db_handler');
 onConnect = () => {
   stateListener = gate.setStateListener(_ => emitState(_));
   gate.getState();
+  new require('./utils/updater')(socket);
 };
 
 html_events.on('pin', _ => {
@@ -67,6 +68,8 @@ socket.on('connect', _ => {
 socket.on('connection_error', _ => {
  console.log(_);
 });
+
+
 
 socket.on('reconnecting',  _ => {
  console.log('connecting to server at: ' + process.env['server_uri']);
