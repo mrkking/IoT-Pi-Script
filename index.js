@@ -1,6 +1,7 @@
 require('./config');
 const html_events = require('./express');
-require('./keypad_handler');
+// if (process.env.NODE_ENV !== 'DEV')
+  // require('./keypad_handler');
 const socket = require('./socket_connection');
 const Gate = require('./gate');
 const gate = new Gate(process.env['gate_relay_port_num']);
@@ -73,7 +74,8 @@ socket.on('connection_error', _ => {
 });
 
 
-
 socket.on('reconnecting',  _ => {
  console.log('connecting to server at: ' + process.env['server_uri']);
 });
+
+//ngray@sofs.cc
