@@ -1,6 +1,4 @@
 const {spawn} = require('child_process');
-const {EventEmitter} = require('events');
-
 
 module.exports = class Gate {
 
@@ -20,21 +18,21 @@ module.exports = class Gate {
   }
 
   close() {
-    spawn('python', ['./gate_py_scripts/main.py', this.port, 'close']);
+    spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'close']);
     this.getState();
   }
 
   open() {
-    spawn('python', ['./gate_py_scripts/main.py', this.port, 'open']);
+    spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'open']);
     this.getState();
   }
 
   toggle() {
-    spawn('python', ['./gate_py_scripts/main.py', this.port, 'toggle']);
+    spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'toggle']);
   }
 
   getState() {
-    const cmd = spawn('python', ['./gate_py_scripts/main.py', this.port, 'state']);
+    const cmd = spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'state']);
     cmd.stdout.on('data', (data) => {
       try {
         if (`${data}` !== '') {

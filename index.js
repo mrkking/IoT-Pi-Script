@@ -1,21 +1,12 @@
-require('./config');
-const html_events = require('./express');
-// if (process.env.NODE_ENV !== 'DEV')
-  // require('./keypad_handler');
-const socket = require('./socket_connection');
-const Gate = require('./gate');
-const gate = new Gate(process.env['gate_relay_port_num']);
-let stateListener = null;
-const {accessKeys} = require('./db/db_handler');
-const Updater = require('./utils/updater');
-let updater;
-
-
-onConnect = () => {
-  stateListener = gate.setStateListener(_ => emitState(_));
-  gate.getState();
-  updater = new Updater(socket);
-};
+const config = require('./config');
+const html_events = require(__dirname+'/express');
+const {EventEmitter} = require('events');
+const app_events = new EventEmitter();
+require(__dirname+'/keypad_handler');
+const connectSocket = require(__dirname+'/socket_connection');
+const Socket = require(__dirname+'/utils/socket');
+const Gate = require(__dirname+'/gate');
+const gate = new Gate(config.getValue('gate_relay_port_num'));
 
 html_events.on('pin', _ => {
   gate.open();
@@ -24,58 +15,12 @@ html_events.on('pin', _ => {
   }, 60000);
 });
 
-socket.on('ready', _ => onConnect());
+let socket = new Socket(connectSocket(), gate, app_events);
 
-const emitState = (state) => {
-  socket.emit('state', state);
-};
-
-socket.on('operate', cmd => {
-  console.log('from server', cmd);
-  switch(cmd['state']) {
-    case 'open':
-      gate.open();
-      break;
-    case 'close':
-      gate.close();
-      break;
-    case 'toggle':
-      gate.toggle();
-      break;
-    default:
-      gate.getState();
-      break;
-  }
-});
-
-socket.on('access_keys', data => {
-  console.log(data);
-  accessKeys.addNewKeys(data ? data['keys'] : []);
-});
-
-socket.on('connect', _ => {
-  console.log('connected to server at: '+ process.env['server_uri']);
-});
-
-socket.on('disconnect', _ => {
-  console.log('disconnected');
-});
-
-socket.on('reconnect',  _ => {
-  console.log('reconnected to server at: ' + process.env['server_uri']);
-});
-
-socket.on('connect', _ => {
-  console.log('connected');
-});
-
-socket.on('connection_error', _ => {
- console.log(_);
+app_events.on('reset', _ => {
+  socket.disconnect();
+  socket.setSocket(connectSocket());
 });
 
 
-socket.on('reconnecting',  _ => {
- console.log('connecting to server at: ' + process.env['server_uri']);
-});
 
-//ngray@sofs.cc
