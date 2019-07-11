@@ -46,7 +46,3 @@ module.exports = class Gate {
   }
 
 };
-
-process.on('exit', _ => {
-  spawn('python', [__dirname+'/gate_py_scripts/main.py', 26, 'close']);
-});
