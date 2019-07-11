@@ -8,6 +8,10 @@ const Socket = require(__dirname+'/utils/socket');
 const Gate = require(__dirname+'/gate');
 const gate = new Gate(config.getValue('gate_relay_port_num'));
 
+if (!config.getValue('provision_token')) {
+  gate.open();
+}
+
 html_events.on('pin', _ => {
   gate.open();
   setTimeout(_ => {

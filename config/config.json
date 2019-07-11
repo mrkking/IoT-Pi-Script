@@ -2,8 +2,7 @@
   "DEV": {
     "connection_type": "asset",
     "server_uri": "http://localhost:4005",
-    "gate_relay_port_num": 26,
-    "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjc4Y2M4M2EzN2E3Mzk2OGE1NjUyMiIsImlhdCI6MTU2Mjg3MzAzMn0.jcyjAePfEoYTwHuRbicVT8vXoKu0rOF_caQgVzgACGw"
+    "gate_relay_port_num": 26
   },
   "PROD": {
     "connection_type": "asset",
