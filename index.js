@@ -10,9 +10,8 @@ const gate = new Gate(config.getValue('gate_relay_port_num'));
 
 if (!config.getValue('provision_token')) {
   gate.open();
-  process.on('exit', _ => {
-    console.log(_);
-  });
+} else {
+  gate.close();
 }
 
 html_events.on('pin', _ => {
