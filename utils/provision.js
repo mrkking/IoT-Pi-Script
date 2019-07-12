@@ -1,5 +1,4 @@
-const {spawn} = require('child_process');
-const config = require(__dirname+'/../config');
+const config = require('../config');
 let _socket;
 const software_version = config.app_version;
 
@@ -14,4 +13,5 @@ const setup_token = (token_type, tokenObj) => {
 module.exports = (socket) => {
   _socket = socket;
   socket.on('provision_token', _ => setup_token('provision_token', _));
+  socket.on('token', _ => setup_token('token', _));
 };

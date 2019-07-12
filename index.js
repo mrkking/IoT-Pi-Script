@@ -1,11 +1,11 @@
 const config = require('./config');
-const html_events = require(__dirname+'/express');
+const html_events = require('./express');
 const {EventEmitter} = require('events');
 const app_events = new EventEmitter();
-require(__dirname+'/keypad_handler');
-const connectSocket = require(__dirname+'/socket_connection');
-const Socket = require(__dirname+'/utils/socket');
-const Gate = require(__dirname+'/gate');
+require('./keypad_handler');
+const connectSocket = require('./socket_connection');
+const Socket = require('./utils/socket');
+const Gate = require('./gate');
 const gate = new Gate(config.getValue('gate_relay_port_num'));
 
 if (!config.getValue('provision_token')) {

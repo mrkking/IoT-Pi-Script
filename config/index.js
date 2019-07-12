@@ -1,5 +1,5 @@
 const editJsonFile = require("edit-json-file");
-const package_info = require(__dirname+'/../package');
+const package_info = require('../package');
 const configFile = editJsonFile(`${__dirname}/../config/config.json`, {
   autosave: true
 });
@@ -14,7 +14,8 @@ class Config {
   }
 
   setValue(key, value) {
-    this.file.set(this.env+'.'+key, value);
+    this.file.set('DEV.'+key, value);
+    this.file.set('PROD.'+key, value);
   }
 
   getValue(key) {

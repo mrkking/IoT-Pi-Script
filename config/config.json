@@ -2,11 +2,13 @@
   "DEV": {
     "connection_type": "asset",
     "server_uri": "http://localhost:4005",
-    "gate_relay_port_num": 26
+    "gate_relay_port_num": 26,
+    "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjgxMzljODMzZWIyNDVmZmJkYWM4MSIsImlhdCI6MTU2MjkwNzU0OH0.PpWJ1xnlOre--iEzwRUfPB7zXwbqyF2kssbA_PZ267o"
   },
   "PROD": {
     "connection_type": "asset",
     "server_uri": "http://174.129.167.18:4005",
-    "gate_relay_port_num": 26
+    "gate_relay_port_num": 26,
+    "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjgxMzljODMzZWIyNDVmZmJkYWM4MSIsImlhdCI6MTU2MjkwNzU0OH0.PpWJ1xnlOre--iEzwRUfPB7zXwbqyF2kssbA_PZ267o"
   }
 }
