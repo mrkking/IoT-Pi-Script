@@ -1,109 +1,151 @@
-#!/usr/bin/python
-import json
-import RPi.GPIO as GPIO
-import time 
+#!/usr/bin/env python
 
-class keypad():
-    def __init__(self, columnCount = 3):
-        GPIO.setmode(GPIO.BCM)
+import pigpio
 
-        # CONSTANTS 
-        if columnCount is 3:
-            self.KEYPAD = [
-                [1,2,3],
-                [4,5,6],
-                [7,8,9],
-                ["*",0,"#"]
-            ]
+class decoder:
 
-            self.ROW         = [6, 13, 16, 19]
-            self.COLUMN      = [0, 5, 12]
-        
-        elif columnCount is 4:
-            self.KEYPAD = [
-                [1,2,3,"A"],
-                [4,5,6,"B"],
-                [7,8,9,"C"],
-                ["*",0,"#","D"]
-            ]
+   """
+   A class to read Wiegand codes of an arbitrary length.
 
-            self.ROW         = [18,23,24,25]
-            self.COLUMN      = [4,17,22,21]
-        else:
-            return
-     
-    def getKey(self):
-         
-        # Set all columns as output low
-        for j in range(len(self.COLUMN)):
-            GPIO.setup(self.COLUMN[j], GPIO.OUT)
-            GPIO.output(self.COLUMN[j], GPIO.LOW)
-         
-        # Set all rows as input
-        for i in range(len(self.ROW)):
-            GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP)
-         
-        # Scan rows for pushed key/button
-        # A valid key press should set "rowVal"  between 0 and 3.
-        rowVal = -1
-        for i in range(len(self.ROW)):
-            tmpRead = GPIO.input(self.ROW[i])
-            if tmpRead == 0:
-                rowVal = i
-                 
-        # if rowVal is not 0 thru 3 then no button was pressed and we can exit
-        if rowVal <0 or rowVal >3:
-            self.exit()
-            return
-         
-        # Convert columns to input
-        for j in range(len(self.COLUMN)):
-                GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-         
-        # Switch the i-th row found from scan to output
-        GPIO.setup(self.ROW[rowVal], GPIO.OUT)
-        GPIO.output(self.ROW[rowVal], GPIO.HIGH)
- 
-        # Scan columns for still-pushed key/button
-        # A valid key press should set "colVal"  between 0 and 2.
-        colVal = -1
-        for j in range(len(self.COLUMN)):
-            tmpRead = GPIO.input(self.COLUMN[j])
-            if tmpRead == 1:
-                colVal=j
-                 
-        # if colVal is not 0 thru 2 then no button was pressed and we can exit
-        if colVal <0 or colVal >2:
-            self.exit()
-            return
- 
-        # Return the value of the key pressed
-        self.exit()
-        return self.KEYPAD[rowVal][colVal]
-         
-    def exit(self):
-        # Reinitialize all rows and columns as input at exit
-        for i in range(len(self.ROW)):
-                GPIO.setup(self.ROW[i], GPIO.IN, pull_up_down=GPIO.PUD_UP) 
-        for j in range(len(self.COLUMN)):
-                GPIO.setup(self.COLUMN[j], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+   The code length and value are returned.
 
+   EXAMPLE
 
-def printKeyPressed(key, key_press):
-    kpd = json.dumps({"Key": key})
-    if key_press is None:
-        print(kpd)
-    elif key_press != key:
-        print(kpd)
-    return key
+   #!/usr/bin/env python
 
-if __name__ == '__main__':
-    # Initialize the keypad class
-    kp = keypad()
-    key_press = None 
-    # Loop while waiting for a keypress
-    while True:
-      key_press =  printKeyPressed(kp.getKey(), key_press)
-           # time.sleep(0.5)
-    # Print the result
-    # print digit
+   import time
+
+   import pigpio
+
+   import wiegand
+
+   def callback(bits, code):
+      print("bits={} code={}".format(bits, code))
+
+   pi = pigpio.pi()
+
+   w = wiegand.decoder(pi, 14, 15, callback)
+
+   time.sleep(300)
+
+   w.cancel()
+
+   pi.stop()
+   """
+
+   def __init__(self, pi, gpio_0, gpio_1, callback, bit_timeout=5):
+
+      """
+      Instantiate with the pi, gpio for 0 (green wire), the gpio for 1
+      (white wire), the callback function, and the bit timeout in
+      milliseconds which indicates the end of a code.
+
+      The callback is passed the code length in bits and the value.
+      """
+
+      self.pi = pi
+      self.gpio_0 = gpio_0
+      self.gpio_1 = gpio_1
+
+      self.callback = callback
+
+      self.bit_timeout = bit_timeout
+
+      self.in_code = False
+
+      self.pi.set_mode(gpio_0, pigpio.INPUT)
+      self.pi.set_mode(gpio_1, pigpio.INPUT)
+
+      self.pi.set_pull_up_down(gpio_0, pigpio.PUD_UP)
+      self.pi.set_pull_up_down(gpio_1, pigpio.PUD_UP)
+
+      self.cb_0 = self.pi.callback(gpio_0, pigpio.FALLING_EDGE, self._cb)
+      self.cb_1 = self.pi.callback(gpio_1, pigpio.FALLING_EDGE, self._cb)
+
+   def _cb(self, gpio, level, tick):
+
+      """
+      Accumulate bits until both gpios 0 and 1 timeout.
+      """
+      if level < pigpio.TIMEOUT:
+         if self.in_code == False:
+            self.bits = 1
+            self.num = 0
+
+            self.in_code = True
+            self.code_timeout = 0
+            self.pi.set_watchdog(self.gpio_0, self.bit_timeout)
+            self.pi.set_watchdog(self.gpio_1, self.bit_timeout)
+         else:
+            self.bits += 1
+            self.num = self.num << 1
+
+         if gpio == self.gpio_0:
+            self.code_timeout = self.code_timeout  & 2 # clear gpio 0 timeout
+         else:
+            self.code_timeout = self.code_timeout  & 1 # clear gpio 1 timeout
+            self.num = self.num | 1
+
+      else:
+
+         if self.in_code:
+            print(self.code_timeout)
+            if gpio == self.gpio_0:
+               self.code_timeout = self.code_timeout | 1 # timeout gpio 0
+            else:
+               self.code_timeout = self.code_timeout | 2 # timeout gpio 1
+
+            if self.code_timeout == 3: # both gpios timed out
+               self.pi.set_watchdog(self.gpio_0, 0)
+               self.pi.set_watchdog(self.gpio_1, 0)
+               self.in_code = False
+               self.callback(self.bits, self.num)
+
+   def cancel(self):
+
+      """
+      Cancel the Wiegand decoder.
+      """
+
+      self.cb_0.cancel()
+      self.cb_1.cancel()
+"""
+def left(s,amount):
+    return s[:amount]
+
+def convert_to_int (value):
+    value = left(value,25)
+    print(value)
+    return value
+"""
+
+if __name__ == "__main__":
+
+   import time
+
+   import pigpio
+
+   import wiegand
+
+   import requests
+
+   def callback(bits, value):
+      print('bits={} value={:026b}'.format(bits, value))
+      value ='{:26b}'.format(value)
+      value = value[:25]
+      value = value[5:25]
+      value = int(value,2)
+     # print('value={:026b}'.format(value))
+      print(value)
+      requests.get(url='http://localhost:4000/kp/'+str(value))
+
+   pi = pigpio.pi()
+
+   w = wiegand.decoder(pi, 14, 15, callback)
+
+   time.sleep(300)
+
+   #w.cancel()
+
+   #pi.stop()
+
