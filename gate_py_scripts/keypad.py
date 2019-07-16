@@ -75,10 +75,13 @@ if __name__ == "__main__":
    import requests
 
    def convert_val_pin(value):
-      value ='{:26b}'.format(value)
-      value = value[:25]
-      value = value[5:25]
-      return int(value,2)
+      try:
+         value ='{:26b}'.format(value)
+         value = value[:25]
+         value = value[5:25]
+         return int(value,2)
+      except:
+          return None
 
    def callback(bits, value):
       #print('bits={} value={:026b}'.format(bits, value))
