@@ -1,7 +1,7 @@
 {
   "DEV": {
     "connection_type": "asset",
-    "server_uri": "http://localhost:4005",
+    "server_uri": "http://192.168.2.2:4005",
     "gate_relay_port_num": 26,
     "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjgxMzljODMzZWIyNDVmZmJkYWM4MSIsImlhdCI6MTU2MjkwNzU0OH0.PpWJ1xnlOre--iEzwRUfPB7zXwbqyF2kssbA_PZ267o"
   },
