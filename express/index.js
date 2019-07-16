@@ -9,7 +9,7 @@ const attachEventEmitter = (req, res, next) => {
   next();
 };
 
-app.use('/kp', attachEventEmitter, require(__dirname+'/keypad'));
+app.use('/kp', attachEventEmitter, require('./keypad'));
 
 app.listen(4000, () => {
   console.log('Running local server on port 4000');
