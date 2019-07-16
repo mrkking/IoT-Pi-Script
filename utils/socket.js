@@ -42,21 +42,12 @@ module.exports = class {
     this.updater = new Updater(this._socket);
   }
 
-  testGate(num_of_times) {
-    this.testInterval = setInterval(_ => {
-      if (!this.testTimeout) {
-
-      }
-    }, 700);
-  }
-
-  testToggleGate() {
-    this._gate.close();
+  testGate() {
+    console.log('test');
     this._gate.open();
-    this.testTimeout = setTimeout(_ => {
+    setTimeout(() => {
       this._gate.close();
-      this.testTimeout = null;
-    }, 300);
+    }, 500);
   }
 
   disconnect() {
@@ -90,20 +81,5 @@ module.exports = class {
   }
 
 };
-
-// socket.resetConnection = () => {
-//   console.log('resetting connection');
-//   socket.disconnect();
-//   require('./config');
-//   socket = require('./socket_connection');
-// };
-
-// onConnect = () => {
-//   stateListener =
-//   gate.getState();
-//
-//   require('./utils/provision')(socket);
-// };
-
 
 //ngray@sofs.cc
