@@ -48,7 +48,6 @@ class decoder:
       else:
 
          if self.in_code:
-            print(self.code_timeout)
             if gpio == self.gpio_0:
                self.code_timeout = self.code_timeout | 1 # timeout gpio 0
             else:
