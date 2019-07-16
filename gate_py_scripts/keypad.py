@@ -4,45 +4,7 @@ import pigpio
 
 class decoder:
 
-   """
-   A class to read Wiegand codes of an arbitrary length.
-
-   The code length and value are returned.
-
-   EXAMPLE
-
-   #!/usr/bin/env python
-
-   import time
-
-   import pigpio
-
-   import wiegand
-
-   def callback(bits, code):
-      print("bits={} code={}".format(bits, code))
-
-   pi = pigpio.pi()
-
-   w = wiegand.decoder(pi, 14, 15, callback)
-
-   time.sleep(300)
-
-   w.cancel()
-
-   pi.stop()
-   """
-
    def __init__(self, pi, gpio_0, gpio_1, callback, bit_timeout=5):
-
-      """
-      Instantiate with the pi, gpio for 0 (green wire), the gpio for 1
-      (white wire), the callback function, and the bit timeout in
-      milliseconds which indicates the end of a code.
-
-      The callback is passed the code length in bits and the value.
-      """
-
       self.pi = pi
       self.gpio_0 = gpio_0
       self.gpio_1 = gpio_1
@@ -64,9 +26,6 @@ class decoder:
 
    def _cb(self, gpio, level, tick):
 
-      """
-      Accumulate bits until both gpios 0 and 1 timeout.
-      """
       if level < pigpio.TIMEOUT:
          if self.in_code == False:
             self.bits = 1
@@ -102,22 +61,9 @@ class decoder:
                self.callback(self.bits, self.num)
 
    def cancel(self):
-
-      """
-      Cancel the Wiegand decoder.
-      """
-
       self.cb_0.cancel()
       self.cb_1.cancel()
-"""
-def left(s,amount):
-    return s[:amount]
 
-def convert_to_int (value):
-    value = left(value,25)
-    print(value)
-    return value
-"""
 
 if __name__ == "__main__":
 
@@ -129,15 +75,20 @@ if __name__ == "__main__":
 
    import requests
 
-   def callback(bits, value):
-      print('bits={} value={:026b}'.format(bits, value))
+   def convert_val_pin(value):
       value ='{:26b}'.format(value)
       value = value[:25]
       value = value[5:25]
-      value = int(value,2)
-     # print('value={:026b}'.format(value))
-      print(value)
-      requests.get(url='http://localhost:4000/kp/'+str(value))
+      return int(value,2)
+
+   def callback(bits, value):
+      #print('bits={} value={:026b}'.format(bits, value))
+      pin = convert_val_pin(value)
+      try:
+        requests.get(url='http://localhost:4000/kp/'+str(pin))
+      except:
+          print(pin)
+
 
    pi = pigpio.pi()
 

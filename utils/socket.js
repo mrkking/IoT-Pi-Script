@@ -30,7 +30,10 @@ module.exports = class {
       this._socket.on('test', () => this.testGate());
       this._socket.on('ready', () => require('./provision')(this._socket));
       this.events.on('provision_pin', _ => this._socket.emit('provision_pin', _));
-      this._socket.on('test_pin', _ => this._socket.emit('provision_pin', {pin: 1234}));
+      this._socket.on('test_pin', _ => {
+        console.log(_);
+        this._socket.emit('provision_pin', {pin: 1234})
+      });
     }
     this._socket.resetConnection = () => this.events.emit('reset');
   }
