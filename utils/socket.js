@@ -25,9 +25,12 @@ module.exports = class {
       this._socket.on('operate', _ => this.controlGate(_));
       this._socket.on('access_keys', _ => this.updateGateAccessKeys(_));
       this._socket.on('ready', _ => this.connect());
+      this.events.on('pin', _ => this._socket.emit('log', 'pin_user_access', _));
     } else {
       this._socket.on('test', () => this.testGate());
       this._socket.on('ready', () => require('./provision')(this._socket));
+      this.events.on('provision_pin', _ => this._socket.emit('provision_pin', _));
+      this._socket.on('test_pin', _ => this._socket.emit('provision_pin', {pin: 1234}));
     }
     this._socket.resetConnection = () => this.events.emit('reset');
   }
@@ -35,7 +38,7 @@ module.exports = class {
   connect() {
     this._gate.getState();
     new Updater(this._socket);
-    gate.setStateListener(_ => this.emitGateState(_));
+    this._gate.setStateListener(_ => this.emitGateState(_));
     this.updater = new Updater(this._socket);
   }
 
