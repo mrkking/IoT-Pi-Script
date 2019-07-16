@@ -89,7 +89,8 @@ if __name__ == "__main__":
       try:
         requests.get(url='http://localhost:4000/kp/'+str(pin))
       except:
-          print(pin)
+          # print(pin)
+          pass
 
 
    pi = pigpio.pi()

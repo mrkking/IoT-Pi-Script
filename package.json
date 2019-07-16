@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "global": "^4.4.0",
     "lokijs": "^1.5.6",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.1",
     "socket.io-client": "^2.2.0",
     "tessel-matrix-keypad": "^0.0.1"

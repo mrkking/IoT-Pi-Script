@@ -1,7 +1,7 @@
 const Updater = require('./updater');
 const {accessKeys} = require('../db/db_handler');
 const config = require('../config');
-
+const fetch = require('node-fetch');
 
 module.exports = class {
 
@@ -30,10 +30,7 @@ module.exports = class {
       this._socket.on('test', () => this.testGate());
       this._socket.on('ready', () => require('./provision')(this._socket));
       this.events.on('provision_pin', _ => this._socket.emit('provision_pin', _));
-      this._socket.on('test_pin', _ => {
-        console.log(_);
-        this._socket.emit('provision_pin', {pin: 1234})
-      });
+      // this._socket.on('test_pin', _ => fetch('http://localhost:4000/kp/1234').then());
     }
     this._socket.resetConnection = () => this.events.emit('reset');
   }

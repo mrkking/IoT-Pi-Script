@@ -21,7 +21,7 @@ html_events.on('pin', _ => {
   }, 60000);
 });
 
-let socket = new Socket(connectSocket(), gate, app_events);
+let socket = new Socket(connectSocket(), gate, html_events);
 
 app_events.on('reset', _ => {
   socket.disconnect();
