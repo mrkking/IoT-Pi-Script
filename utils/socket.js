@@ -2,6 +2,7 @@ const Updater = require('./updater');
 const {accessKeys} = require('../db/db_handler');
 const config = require('../config');
 const fetch = require('node-fetch');
+const Gate = require('../gate');
 
 module.exports = class {
 
@@ -43,10 +44,10 @@ module.exports = class {
   }
 
   testGate() {
-    console.log('test');
-    this._gate.open();
+    const gate = new Gate('21');
+    gate.open();
     setTimeout(() => {
-      this._gate.close();
+      gate.close();
     }, 500);
   }
 

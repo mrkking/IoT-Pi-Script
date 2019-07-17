@@ -17,6 +17,6 @@ module.exports = (socket) => {
   _socket = socket;
   socket.on('provision_token', _ => setup_token('provision_token', _));
   socket.on('token', _ => {
-    setup_token('token', _)
+    setup_token('token', _);
   });
 };
