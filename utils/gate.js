@@ -1,7 +1,7 @@
-const Relay = require('./relay');
+const Port = require('./port');
 // const moment = require('moment');
 
-module.exports = class Gate extends Relay {
+module.exports = class Gate extends Port {
 
   constructor(port, sensor) {
     super(port);
@@ -44,3 +44,4 @@ module.exports = class Gate extends Relay {
     }
   }
 };
+

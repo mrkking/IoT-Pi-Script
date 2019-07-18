@@ -1,7 +1,7 @@
 const {spawn} = require('child_process');
 const {EventEmitter} = require('events');
 
-module.exports = class Relay {
+module.exports = class Port {
 
   constructor(port) {
     this.port = port ? port : 26;
@@ -13,12 +13,18 @@ module.exports = class Relay {
     this.events.emit('state', {state: this.state});
   }
 
-  close() {
+  close(updateState) {
     spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'close']);
+    if (updateState) {
+      this.updateState();
+    }
   }
 
-  open() {
+  open(updateState) {
     spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'open']);
+    if (updateState) {
+      this.updateState();
+    }
   }
 
   _setState(data) {

@@ -1,15 +1,46 @@
 const {spawn} = require('child_process');
 const {EventEmitter} = require('events');
+const Port = require('./utils/port');
 
+class Feedback extends Port {
+
+  constructor(port) {
+    super(port);
+  }
+
+  pingWithInterval(times, duration) {
+    if (this.interval) {
+      this.clearInterval(this.interval);
+    }
+    let amt = 0;
+    this.interval = setInterval(_ => {
+      this.ping(duration);
+      amt++;
+      if (amt === times) {
+        clearInterval(this.interval);
+      }
+    }, duration ? duration + 250 : 750);
+  }
+
+  ping(duration) {
+    this.open();
+    setTimeout(_ => {
+      this.close();
+    }, duration ? duration : 500);
+  }
+
+}
 
 module.exports = class KeyPad {
 
-  constructor(name, portA, portB, feedback_port, gate, camera, html_events) {
-    this.name = name;
-    this.portA = portA;
-    this.portB = portB;
+  constructor(kp, gate, camera, html_events) {
+    this.name = kp.name;
+    this.portA = kp.portA;
+    this.portB = kp.portB;
     this.cmd = null;
-    this.feedback =
+    this.buzzer = new Feedback(kp['buzzer']);
+    this.led = new Feedback(kp['led']);
+    this.led.open(true);
     this.events = new EventEmitter();
     this.emitStatus(false);
     // html_events.

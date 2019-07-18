@@ -7,14 +7,9 @@
     {
       "id": 0,
       "name": "Entrance",
-      "ports": [14, 15],
-      "feedback_port": 21
-    },
-    {
-      "id": 1,
-      "name": "Exit",
-      "ports": [16, 17],
-      "feedback_port": 21
+      "ports": [2, 3],
+      "buzzer": 4,
+      "led": 14
     }
   ],
   "sensor_port": [
