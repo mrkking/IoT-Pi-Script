@@ -2,7 +2,7 @@ const Updater = require('./updater');
 const {accessKeys} = require('../db/db_handler');
 const config = require('../config');
 const fetch = require('node-fetch');
-const Gate = require('../gate');
+const Gate = require('./gate');
 
 module.exports = class {
 

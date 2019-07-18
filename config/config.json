@@ -1,14 +1,35 @@
 {
-  "DEV": {
-    "connection_type": "asset",
-    "server_uri": "http://192.168.2.1:4005",
-    "gate_relay_port_num": 26,
-    "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjgxMzljODMzZWIyNDVmZmJkYWM4MSIsImlhdCI6MTU2MjkwNzU0OH0.PpWJ1xnlOre--iEzwRUfPB7zXwbqyF2kssbA_PZ267o"
-  },
-  "PROD": {
-    "connection_type": "asset",
-    "server_uri": "http://174.129.167.18:4005",
-    "gate_relay_port_num": 26,
-    "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjgxMzljODMzZWIyNDVmZmJkYWM4MSIsImlhdCI6MTU2MjkwNzU0OH0.PpWJ1xnlOre--iEzwRUfPB7zXwbqyF2kssbA_PZ267o"
-  }
+  "connection_type": "asset",
+  "server_uri": "http://174.129.167.18:4005",
+  "provision_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjgxMzljODMzZWIyNDVmZmJkYWM4MSIsImlhdCI6MTU2MjkwNzU0OH0.PpWJ1xnlOre--iEzwRUfPB7zXwbqyF2kssbA_PZ267o",
+  "gate_port": 26,
+  "keypads": [
+    {
+      "id": 0,
+      "name": "Entrance",
+      "ports": [14, 15],
+      "feedback_port": 21
+    },
+    {
+      "id": 1,
+      "name": "Exit",
+      "ports": [16, 17],
+      "feedback_port": 21
+    }
+  ],
+  "sensor_port": [
+    18
+  ],
+  "cameras": [
+    {
+      "name": "Camera 1",
+      "ip_address": "192.168.2.2",
+      "assigned_keypad": 0
+    },
+    {
+      "name": "Camera 2",
+      "ip_address": "192.168.2.3",
+      "assigned_keypad": 1
+    }
+  ]
 }

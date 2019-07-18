@@ -11,16 +11,16 @@ if len(args) == 3:
         print('invalid port number')
         sys.exit(0)
         
-    gate = Gate(port)
+    relay = Gate(port)
     command = args[2]
     if command.lower() == 'open':
-        gate.open()
+        relay.open()
     elif command.lower() == 'close':
-        gate.close()
+        relay.close()
     elif command.lower() == 'state':
-        gate.print_state()
+        relay.print_state()
     else:
-        print('invalid command; [open, close, toggle, state]')
+        print('invalid command; [open, close, state]')
         sys.exit(0)
 else:
     print('Please provide proper arguments; e.g. python main.py <port> <command>')

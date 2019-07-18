@@ -1,42 +1,37 @@
 const {spawn} = require('child_process');
+const {EventEmitter} = require('events');
 
-module.exports = class Gate {
+module.exports = class Relay {
 
   constructor(port) {
     this.port = port ? port : 26;
-    this.onStateChangeListener = null;
+    this.state = null;
+    this.events = new EventEmitter();
   }
 
-  setStateListener(fn) {
-    this.onStateChangeListener = fn;
-  }
-
-  onStateChange(state) {
-    if (this.onStateChangeListener) {
-      this.onStateChangeListener(state);
-    }
+  _onStateChange() {
+    this.events.emit('state', {state: this.state});
   }
 
   close() {
     spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'close']);
-    this.getState();
   }
 
   open() {
     spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'open']);
-    this.getState();
   }
 
-  toggle() {
-    spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'toggle']);
+  _setState(data) {
+    this.state = data['state'];
+    this._onStateChange();
   }
 
-  getState() {
+  updateState() {
     const cmd = spawn('python', [__dirname+'/gate_py_scripts/main.py', this.port, 'state']);
     cmd.stdout.on('data', (data) => {
       try {
         if (`${data}` !== '') {
-          this.onStateChange(JSON.parse(`${data}`.trim()));
+          this.setState(JSON.parse(`${data}`.trim()));
         }
       } catch(e) {
         console.log(e, data);

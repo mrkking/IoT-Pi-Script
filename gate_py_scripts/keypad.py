@@ -74,6 +74,25 @@ if __name__ == "__main__":
 
    import requests
 
+   import sys
+
+   args = sys.argsv
+   portA = None
+   portB = None
+   name = None
+
+   if len(args) == 4:
+      try:
+        name = args[1]
+        portA = int(args[2])
+        portB = int(args[3])
+        print('connected')
+      except:
+          print('invalid ports')
+          sys.exit(0)
+   else:
+       print('Please provide proper arguments; e.g. python keypad.py <name> <portA> <portB>')
+
    def convert_val_pin(value):
       try:
          value ='{:26b}'.format(value)
@@ -87,9 +106,12 @@ if __name__ == "__main__":
       #print('bits={} value={:026b}'.format(bits, value))
       pin = convert_val_pin(value)
       try:
-        requests.get(url='http://localhost:4000/kp/'+str(pin))
+        params = {
+          'pin': pin,
+          'name': name
+        }
+        requests.get(url='http://localhost:4000/kp/', params=params)
       except:
-          # print(pin)
           pass
 
 
